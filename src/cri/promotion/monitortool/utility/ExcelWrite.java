@@ -17,7 +17,7 @@ public class ExcelWrite {
 
 	private static Logger logger = Logger.getLogger(cri.promotion.monitortool.utility.ExcelWrite.class);
 
-	private static final String FILE_NAME = "D:\\PromotionFile.xlsx";
+	private static final String FILE_NAME = "PromotionFile.xlsx";
 
 	public static boolean excelWriterList(List<UnavailablePromotionModel> list) {
 		if(list == null || list.isEmpty()) {
@@ -38,10 +38,13 @@ public class ExcelWrite {
 		cell3.setCellValue("START DATE");
 		Cell cell4 = headerRow.createCell(3);
 		cell4.setCellValue("END DATE");
+		Cell cell5 = headerRow.createCell(4);
+		cell5.setCellValue("STORE STATUS");		
 		sheet.autoSizeColumn(0);
 		sheet.autoSizeColumn(1);
 		sheet.autoSizeColumn(2);
 		sheet.autoSizeColumn(3);
+		sheet.autoSizeColumn(4);
 		
 		int rowNum = 1;
 		
@@ -49,17 +52,30 @@ public class ExcelWrite {
 			int colNum = 0;
 			Row row = sheet.createRow(rowNum++);
 			
-			Cell storeCell = row.createCell(colNum++);
-			storeCell.setCellValue(unablabelPromotionModel.getStoreNumber());
+			if(unablabelPromotionModel.getStoreNumber() != null) {
+				Cell storeCell = row.createCell(colNum++);
+				storeCell.setCellValue(unablabelPromotionModel.getStoreNumber());
+			}
+			if(unablabelPromotionModel.getPromotionId() != null) {
+				Cell promotionCell = row.createCell(colNum++);
+				promotionCell.setCellValue(unablabelPromotionModel.getPromotionId());
+			}
+			if(unablabelPromotionModel.getStartDate() != null) {
+				Cell startDateCell = row.createCell(colNum++);
+				startDateCell.setCellValue(unablabelPromotionModel.getStartDate().toString());
+			}
+			if(unablabelPromotionModel.getEndDate() != null) {
+				Cell endDateCell = row.createCell(colNum++);
+				endDateCell.setCellValue(unablabelPromotionModel.getEndDate().toString());
+			}
+			Cell storeStatusCell = row.createCell(4);
+			if(unablabelPromotionModel.getStoreStatus() != null) {
+				storeStatusCell.setCellValue(unablabelPromotionModel.getStoreStatus());
+			}else {
+				storeStatusCell.setCellValue("Online");
+			}
 			
-			Cell promotionCell = row.createCell(colNum++);
-			promotionCell.setCellValue(unablabelPromotionModel.getPromotionId());
-
-			Cell startDateCell = row.createCell(colNum++);
-			startDateCell.setCellValue(unablabelPromotionModel.getStartDate().toString());
 			
-			Cell endDateCell = row.createCell(colNum++);
-			endDateCell.setCellValue(unablabelPromotionModel.getEndDate().toString());
 
 
 		}

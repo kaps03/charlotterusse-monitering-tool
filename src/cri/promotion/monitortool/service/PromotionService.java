@@ -27,27 +27,34 @@ public class PromotionService {
 			for (XRelateModel xRelateModel : xRelateModels) {
 				List<PrcDealModel> dealModels = storePrcDealDAO
 						.getPrcDealModelListByStoreNumber(xRelateModel.getStoreNumber());
-				
-				List<XRelateModel> list = xRelateModels.stream()
-						.filter(model -> model.getStoreNumber() == xRelateModel.getStoreNumber())
-						.collect(Collectors.toList());
-
-				for (int k = 0; k < list.size(); k++) {
-					int count = k;
-					List<PrcDealModel> dealModelList = dealModels.stream().filter(
-							dealModel -> Integer.parseInt(dealModel.getDealId()) == list.get(count).getPromotionId())
+				if(dealModels != null && !dealModels.isEmpty()) {
+					List<XRelateModel> list = xRelateModels.stream()
+							.filter(model -> model.getStoreNumber() == xRelateModel.getStoreNumber())
 							.collect(Collectors.toList());
 
-					if (dealModelList == null || dealModelList.isEmpty()) {
-						unavailablePromotionModel = new UnavailablePromotionModel();
-						unavailablePromotionModel.setEndDate(list.get(k).getEndDate());
-						unavailablePromotionModel.setStartDate(list.get(k).getStartDate());
-						unavailablePromotionModel.setPromotionId(list.get(k).getPromotionId());
-						unavailablePromotionModel.setStoreNumber(list.get(k).getStoreNumber());
-						unavailablePromotionModels.add(unavailablePromotionModel);
-					}
+					for (int k = 0; k < list.size(); k++) {
+						int count = k;
+						List<PrcDealModel> dealModelList = dealModels.stream().filter(
+								dealModel -> Integer.parseInt(dealModel.getDealId()) == list.get(count).getPromotionId())
+								.collect(Collectors.toList());
 
+						if (dealModelList == null || dealModelList.isEmpty()) {
+							unavailablePromotionModel = new UnavailablePromotionModel();
+							unavailablePromotionModel.setEndDate(list.get(k).getEndDate());
+							unavailablePromotionModel.setStartDate(list.get(k).getStartDate());
+							unavailablePromotionModel.setPromotionId(list.get(k).getPromotionId());
+							unavailablePromotionModel.setStoreNumber(list.get(k).getStoreNumber());
+							unavailablePromotionModels.add(unavailablePromotionModel);
+						}
+
+					}
+				}else {
+					unavailablePromotionModel = new UnavailablePromotionModel();
+					unavailablePromotionModel.setStoreNumber(xRelateModel.getStoreNumber());
+					unavailablePromotionModel.setStoreStatus("Store has offline.");
+					unavailablePromotionModels.add(unavailablePromotionModel);
 				}
+				
 			}
 
 		} catch (SQLException e) {

@@ -43,6 +43,8 @@ public class StorePrcDealDAO {
 		List<PrcDealModel> dealModels = new ArrayList<>();
 		try {
 			Connection connection = StoreConnectionUtility.getConnectionByStoreNumber(storeNumber);
+			if(connection == null)
+				return null;
 			Statement  statement = connection.createStatement();
 			logger.info("Statement Object created");
 			ResultSet resultSet = statement.executeQuery(Query.STORE_GET_ALL_PRC_DEAL_MODEL);

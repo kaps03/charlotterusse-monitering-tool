@@ -8,6 +8,7 @@ public class UnavailablePromotionModel {
 	private Date startDate;
 	private Date endDate;
 	private Integer promotionId;
+	private String storeStatus;
 
 	public Integer getStoreNumber() {
 		return storeNumber;
@@ -39,6 +40,14 @@ public class UnavailablePromotionModel {
 
 	public void setPromotionId(Integer promotionId) {
 		this.promotionId = promotionId;
+	}
+
+	public String getStoreStatus() {
+		return storeStatus;
+	}
+
+	public void setStoreStatus(String storeStatus) {
+		this.storeStatus = storeStatus;
 	}
 
 	@Override

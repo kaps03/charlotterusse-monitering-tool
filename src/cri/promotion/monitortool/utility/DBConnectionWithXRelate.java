@@ -24,8 +24,8 @@ public class DBConnectionWithXRelate {
 				Properties properties = new Properties();
 				properties.load(reader);
 				Class.forName(properties.getProperty("sqlserver_driver_name"));
-				connection = DriverManager.getConnection(properties.getProperty("store_sqlserver_url"),
-						properties.getProperty("store_sqlserver_username"), properties.getProperty("store_sqlserver_password"));
+				connection = DriverManager.getConnection(properties.getProperty("xrelate_sqlserver_url"),
+						properties.getProperty("xrelate_sqlserver_username"), properties.getProperty("xrelate_sqlserver_password"));
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
