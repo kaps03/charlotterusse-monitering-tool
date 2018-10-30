@@ -1,5 +1,6 @@
 package cri.promotion.monitortool.utility;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,11 +18,11 @@ public class ExcelWrite {
 
 	private static Logger logger = Logger.getLogger(cri.promotion.monitortool.utility.ExcelWrite.class);
 
-	private static final String FILE_NAME = "PromotionFile.xlsx";
+	private static final String FILE_NAME = "src//PromotionFile.xlsx";
 
-	public static boolean excelWriterList(List<UnavailablePromotionModel> list) {
+	public static File excelWriterList(List<UnavailablePromotionModel> list) {
 		if(list == null || list.isEmpty()) {
-			return false;
+			return null;
 		}
 		
 		XSSFWorkbook workbook = new XSSFWorkbook();
@@ -91,6 +92,6 @@ public class ExcelWrite {
 			e.printStackTrace();
 		}
 
-		return true;
+		return new File(FILE_NAME);
 	}
 }

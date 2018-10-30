@@ -21,11 +21,9 @@ public class StoreConnectionUtility {
 			return null;
 		}
 		try {
-			Properties properties = null;
-				FileReader reader = new FileReader("src\\config.properties");
-				properties = new Properties();
-				properties.load(reader);
-				Class.forName(properties.getProperty("sqlserver_driver_name"));
+			Properties properties =  new Properties();
+			properties.load(new FileReader("src\\config.properties"));
+			Class.forName(properties.getProperty("sqlserver_driver_name"));
 				
 //			String url = properties.getProperty("store_sqlserver_url").replace("localhost", "CR"+storeNumber+"-1");
 //			String url = properties.getProperty("store_sqlserver_url").replace("localhost", "storeNumber");
