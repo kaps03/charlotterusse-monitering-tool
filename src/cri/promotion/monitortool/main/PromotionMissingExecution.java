@@ -8,21 +8,21 @@ import org.apache.log4j.Logger;
 import cri.promotion.monitortool.email.EmailSender;
 import cri.promotion.monitortool.model.UnavailablePromotionModel;
 import cri.promotion.monitortool.service.PromotionService;
-import cri.promotion.monitortool.utility.ExcelWrite;
+import cri.promotion.monitortool.utility.ExcelWriter;
 
-public class PromotionExecution {
+public class PromotionMissingExecution {
 
-	private static Logger logger = Logger.getLogger(cri.promotion.monitortool.main.PromotionExecution.class);
+	private static Logger logger = Logger.getLogger(cri.promotion.monitortool.main.PromotionMissingExecution.class);
 	
 	public static void main(String[] args) {
 		try {
 			PromotionService promotionService = new PromotionService();
-			logger.info("Calling list of promotion which is not available into store.");
-			List<UnavailablePromotionModel> unavailablePromotionModels =  promotionService.getPromotionInfos();
+			logger.info("Calling getMissingPromotionsInfo method for missing promotions");
+			List<UnavailablePromotionModel> unavailablePromotionModels =  promotionService.getMissingPromotionsInfo();
 			//writing list of data into file..
-			logger.info("Writing into Excel sheet.");
-			File excelFile = ExcelWrite.excelWriterList(unavailablePromotionModels);
-			logger.info("Successfully Writtern into Excel sheet.");
+			logger.info("Writing Missing Promotions into Excel sheet.");
+			File excelFile = ExcelWriter.excelWriterList(unavailablePromotionModels);
+			logger.info("Missing Promotions successfully written into Excel sheet.");
 			//sending email to manager
 			logger.info("Sending Email");
 			String res = EmailSender.sendEmail(excelFile);

@@ -9,6 +9,7 @@ public class UnavailablePromotionModel {
 	private Date endDate;
 	private Integer promotionId;
 	private String storeStatus;
+	private String description;
 
 	public Integer getStoreNumber() {
 		return storeNumber;
@@ -56,5 +57,12 @@ public class UnavailablePromotionModel {
 				+ endDate + ", promotionId=" + promotionId + "]";
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 }

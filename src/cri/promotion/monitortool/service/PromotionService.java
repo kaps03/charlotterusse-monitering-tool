@@ -13,7 +13,7 @@ import cri.promotion.monitortool.model.XRelateModel;
 
 public class PromotionService {
 
-	public List<UnavailablePromotionModel> getPromotionInfos() {
+	public List<UnavailablePromotionModel> getMissingPromotionsInfo() {
 
 		StorePrcDealDAO storePrcDealDAO = new StorePrcDealDAO();
 		XRelateCmpPromotionDAO xRelateCmpPromotionDAO = new XRelateCmpPromotionDAO();
@@ -44,6 +44,7 @@ public class PromotionService {
 							unavailablePromotionModel.setStartDate(list.get(k).getStartDate());
 							unavailablePromotionModel.setPromotionId(list.get(k).getPromotionId());
 							unavailablePromotionModel.setStoreNumber(list.get(k).getStoreNumber());
+							unavailablePromotionModel.setDescription(list.get(k).getPromotionDescription());
 							unavailablePromotionModels.add(unavailablePromotionModel);
 						}
 

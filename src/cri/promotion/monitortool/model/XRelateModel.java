@@ -9,6 +9,7 @@ public class XRelateModel {
 	private Date endDate;
 	private String attributeName;
 	private Integer storeNumber;
+	private String promotionDescription;
 
 	public Integer getPromotionId() {
 		return promotionId;
@@ -50,10 +51,19 @@ public class XRelateModel {
 		this.storeNumber = storeNumber;
 	}
 
+	public String getPromotionDescription() {
+		return promotionDescription;
+	}
+
+	public void setPromotionDescription(String promotionDescription) {
+		this.promotionDescription = promotionDescription;
+	}
+
 	@Override
 	public String toString() {
 		return "XRelateModel [promotionId=" + promotionId + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", attributeName=" + attributeName + ", storeNumber=" + storeNumber + "]";
+				+ ", attributeName=" + attributeName + ", storeNumber=" + storeNumber + ", promotionDescription="
+				+ promotionDescription + "]";
 	}
 
 }

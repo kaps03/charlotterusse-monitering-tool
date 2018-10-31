@@ -32,10 +32,11 @@ public class XRelateCmpPromotionDAO {
 		while (resultSet.next()) {
 			xRelateModel = new XRelateModel();
 			xRelateModel.setPromotionId(resultSet.getInt(1));
-			xRelateModel.setStartDate(resultSet.getDate(2));
-			xRelateModel.setEndDate(resultSet.getDate(3));
-			xRelateModel.setAttributeName(resultSet.getString(4));
-			xRelateModel.setStoreNumber(resultSet.getInt(5));
+			xRelateModel.setPromotionDescription(resultSet.getString(2));
+			xRelateModel.setStartDate(resultSet.getDate(3));
+			xRelateModel.setEndDate(resultSet.getDate(4));
+			xRelateModel.setAttributeName(resultSet.getString(5));
+			xRelateModel.setStoreNumber(resultSet.getInt(6));
 			xRelateModels.add(xRelateModel);
 		}
 

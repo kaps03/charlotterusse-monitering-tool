@@ -28,7 +28,6 @@ public class EmailSender {
 	
 	public static String sendEmail(File attachedFile) {
 		Properties props = new Properties();
-//		props.put("mail.smtp.host", "true");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
@@ -50,13 +49,13 @@ public class EmailSender {
             InternetAddress[] address = InternetAddress.parse(to, true);
             //Setting the recepients from the address variable
             msg.setRecipients(Message.RecipientType.TO, address);
-            String timeStamp = new SimpleDateFormat("yyyymmdd_hh-mm-ss").format(new Date());
-            msg.setSubject("Promotion Mail : " + timeStamp);
+            String timeStamp = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+            msg.setSubject("Missing Promotions as of " + timeStamp);
             msg.setSentDate(new Date());
             msg.setHeader("XPriority", "1");
             
             BodyPart msgBodyPart = new MimeBodyPart();  
-            msgBodyPart.setText("This is message body");  
+            msgBodyPart.setText("Please see attached missing promotions report for today.\n Check the active promotions that are not found in the following stores.");  
             
             // creates body part for the attachment
             MimeBodyPart attachPart = new MimeBodyPart();
@@ -66,14 +65,16 @@ public class EmailSender {
             multipart.addBodyPart(msgBodyPart);
             msg.setContent(multipart);
 
+            logger.info("Sending email...");
             Transport.send(msg);
-            logger.info("Mail has been sent succesfully to end user.");
 		}catch(MessagingException exception) {
 			 logger.info("Unable to send an email" + exception);
+			 exception.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
 			logger.info("Unable to send an email" + e);
 		}
-		return "Mail has been sent succesfully to end user.";
+		return "Email has been sent succesfully to the end user.";
 	}
 
 }
