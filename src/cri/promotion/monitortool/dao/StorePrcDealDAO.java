@@ -33,7 +33,7 @@ public class StorePrcDealDAO {
 			PrcDealModel model = null;
 			while (resultSet.next()) {
 				model = new PrcDealModel();
-				model.setDealId(resultSet.getString(2).split(":")[0]);
+				model.setDealId(resultSet.getString(2).split(":")[1]);
 				dealModels.add(model);
 			}
 		} catch (SQLException e) {
